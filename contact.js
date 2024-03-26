@@ -68,15 +68,15 @@ class MessageController {
       const { name, email, message } = req.body;
 
       if (!name || !email || !message) {
-        return res.status(400).json({ error: 'Todos os campos são obrigatórios.' });
+        return res.status(400).json({ error: 'All fields are mandatory.' });
       }
 
       await this.notionService.createPage(name, email, message);
 
-      res.status(200).json({ message: 'Sucesso' });
+      res.status(200).json({ message: 'Sucess' });
     } catch (error) {
-      console.error('Erro ao processar solicitação:', error);
-      res.status(500).json({ error: 'Ocorreu um erro ao processar a solicitação.' });
+      console.error('Error processing request:', error);
+      res.status(500).json({ error: 'OAn error occurred while processing the request.' });
     }
   }
 }
