@@ -1,21 +1,24 @@
-import express from 'express';
+import express, { Router, Request, Response } from 'express';
 import { Client } from '@notionhq/client';
 import dotenv from 'dotenv';
+import { NotionPageResponse } from './notionTypes'; 
 
 dotenv.config();
 
 class NotionService {
+  private notion: Client;
+
   constructor() {
     this.notion = new Client({
       auth: process.env.NOTION_API_KEY,
     });
   }
 
-  async createPage(name, email, message) {
+  async createPage(name: string, email: string, message: string): Promise<NotionPageResponse> {
     const response = await this.notion.pages.create({
       parent: {
         type: 'database_id',
-        database_id: 'c4d75e7e6cac43bd87aee6225e134e61',
+        database_id: process.env.NOTION_DATABASE_ID as string,
       },
       properties: {
         Name: {
@@ -48,22 +51,25 @@ class NotionService {
       },
     });
 
-    return response;
+    return response as NotionPageResponse;
   }
 }
 
 class MessageController {
+  public router: Router;
+  private notionService: NotionService;
+
   constructor() {
     this.router = express.Router();
     this.notionService = new NotionService();
     this.initializeRoutes();
   }
 
-  initializeRoutes() {
+  initializeRoutes(): void {
     this.router.post('/', this.postMessage.bind(this));
   }
 
-  async postMessage(req, res) {
+  async postMessage(req: Request, res: Response): Promise<Response | void> {
     try {
       const { name, email, message } = req.body;
 
@@ -71,12 +77,12 @@ class MessageController {
         return res.status(400).json({ error: 'All fields are mandatory.' });
       }
 
-      await this.notionService.createPage(name, email, message);
+      const notionResponse = await this.notionService.createPage(name, email, message);
 
-      res.status(200).json({ message: 'Sucess' });
+      return res.status(200).json({ message: 'Success', data: notionResponse });
     } catch (error) {
       console.error('Error processing request:', error);
-      res.status(500).json({ error: 'OAn error occurred while processing the request.' });
+      return res.status(500).json({ error: 'An error occurred while processing the request.' });
     }
   }
 }

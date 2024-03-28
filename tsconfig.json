@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+      "target": "es5",                          // Especifica o ambiente de execução do JavaScript
+      "module": "commonjs",                     // Usa a sintaxe CommonJS para módulos
+      "outDir": "./dist",                       // Especifica o diretório de saída para os arquivos compilados
+      "rootDir": "./",                       // Especifica o diretório raiz dos arquivos fonte
+      "strict": true,                           // Ativa uma ampla gama de verificações de tipo rigorosas
+      "esModuleInterop": true,                  // Permite a interoperabilidade de módulos ES6 com módulos CommonJS
+      "forceConsistentCasingInFileNames": true, // Desativa a diferenciação entre maiúsculas e minúsculas nos nomes dos arquivos
+      "skipLibCheck": true,                     // Pula a verificação dos arquivos de declaração de tipo
+      "resolveJsonModule": true                 // Permite a importação de arquivos '.json'
+    },
+    "include": [
+      "./*.ts" // Inclui todos os arquivos TypeScript no diretório src (e subdiretórios)
+    ],
+    "exclude": [
+      "node_modules", // Exclui o diretório node_modules das compilações
+      "**/*.test.ts"  // Exclui arquivos de teste da compilação
+    ]
+  }
+  
