@@ -15,6 +15,8 @@ To run this project, you will need to add the following environment variables to
 
 `NOTION_API_KEY` (you need to create it within notion)
 
+`NOTION_DATABASE_ID`
+
 
 ## API documentation
 
