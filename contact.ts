@@ -1,7 +1,7 @@
 import express, { Router, Request, Response } from 'express';
 import { Client } from '@notionhq/client';
 import dotenv from 'dotenv';
-import { NotionPageResponse } from './notionTypes'; 
+import { NotionPageResponse } from './notionTypes';
 
 dotenv.config();
 
@@ -69,13 +69,14 @@ class MessageController {
     this.router.post('/', this.postMessage.bind(this));
   }
 
-  async postMessage(req: Request, res: Response): Promise<Response | void> {
+  async postMessage(req: Request, res: Response): Promise<void> {
     try {
       const { name, email, message } = req.body;
 
       if (!name || !email || !message) {
         return res.status(400).json({ error: 'All fields are mandatory.' });
       }
+
 
       const notionResponse = await this.notionService.createPage(name, email, message);
 
