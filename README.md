@@ -1,7 +1,7 @@
 
 # Integration with notion
 
-api that sends data in bulk to a database within notion
+api that sends data in bulk to a database within notion.
 
 
 
