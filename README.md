@@ -9,7 +9,7 @@ api that sends data in bulk to a database within notion.
 
 ## Environment variables
 
-To run this project, you will need to add the following environment variables to your .env
+To run this project, you will need to add the following environment variables to your .env.
 
 `API_KEY`
 
