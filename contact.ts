@@ -34,7 +34,7 @@ class NotionService {
           rich_text: [
             {
               text: {
-                content: emaill,
+                content: email,
               },
             },
           ],
